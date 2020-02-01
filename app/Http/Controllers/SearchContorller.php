@@ -78,4 +78,27 @@ class SearchContorller extends Controller
          return response()->json('Direct Access Not Allowed');
       }
     }
+
+    public function sideSearch(Request $request)
+    {
+      $totalCnt = 0;
+      $appsCnt = AppsData::where('app_name', 'like', '%'.request('query').'%')
+                            ->orderBy('reg_time', 'desc')
+                            ->count();
+
+      $appsData = AppsData::where('app_name', 'like', '%'.request('query').'%')
+                            ->orderBy('reg_time', 'desc')
+                            ->take(20)
+                            ->get();
+
+      $mem_id = AppsData::where('app_name', '=', $appsData[0]['app_name'])
+                          ->select('mem_id')->get();
+
+      $userInfo = UserInfo::where('mem_id', '=', $mem_id)
+                            ->get();
+
+      $data = [ $appsData, $userInfo ];
+
+      return $data;
+    }
 }

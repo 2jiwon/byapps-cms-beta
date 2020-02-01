@@ -60,7 +60,7 @@
                             <label class="col-md-2 col-form-label">회원 ID</label>
                             <div class="col-md-10 col-xs-9">
                                 <span class="form-control-static mt-1 mb-1 d-p-inline"> <i class="fa fa-user"></i>&nbsp;&nbsp; {{ $appData->mem_id }} </span>
-                                <button class="btn btn-primary waves-effect wave-light btn-xs ml-1 mr-1" type="button" onclick="getMemData('{!! $appData->mem_id !!})'">회원정보</button>
+                                <button class="btn btn-primary waves-effect wave-light btn-xs ml-1 mr-1" type="button" onclick="getMemberInfo('{!! $appData->mem_id !!}')">회원정보</button>
                                 <button class="btn btn-info waves-effect btn-xs mr-1" type="button" >Transfer</button>
                             </div>
                         </div>
@@ -243,7 +243,6 @@
                                 <p class="form-control-static mt-1 mb-1"> {{ $appData->server_group }}그룹 </p>
                             </div>
                         </div>
-
 
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">GCM Key</label>
@@ -757,6 +756,13 @@
         var url = obj.parent().parent().find('input[type=text]').val()
         if(!url) return;
         window.open(url, "_blank");
+    }
+
+    // 사이드바 열고 고객정보 보기
+    function getMemberInfo(idx) {
+      console.log(idx);
+      sidebarOpen();
+      $('#nav-cc-tab').click();
     }
 </script>
 @endsection

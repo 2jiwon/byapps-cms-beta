@@ -154,9 +154,14 @@ Route::group(['middleware' => ['auth']], function() {
   Route::view('/resellerpaymentlist', 'resellerpaymentlist')->name('resellerpaymentlist.view');
   Route::get('/resellerpaymentlist/data', 'ResellerPaymentController@getResellerPaymentListData')->name('resellerpaymentlist');
   Route::get('/resellerpaymentdetail/{idx}', 'ResellerPaymentController@getSingleData')->name('resellerpaymentdetail');
+
   //댓글
   Route::post('/comment','CommentController')->name('comment');
   Route::post('/commentSend','CommentController@send')->name('commentsend');
+
+  // 사이드바 검색
+  Route::post('/side_search', 'SearchContorller@sideSearch')->name('side-search');
+
   //관리자 관리
   Route::get('/admin','Admin')->name('admin');
   Route::post('/adminupdate','Admin@update')->name('adminupdate');
