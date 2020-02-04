@@ -168,6 +168,6 @@ Route::group(['middleware' => ['auth']], function() {
 
   //회원정보
   Route::get('/user/{mem_id}',function($mem_id){
-    return view('partials.asideUserInfo',['mem_id'=>$mem_id]);
+    return view('partials.aside_user_info',['mem_id'=>$mem_id]);
   });
 });
