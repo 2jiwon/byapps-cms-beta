@@ -7,16 +7,19 @@ use Illuminate\Http\Request;
 class CommentController extends Controller
 {
     protected $colmus;
+
     public function __construct(){
         $this->colmus = ['mem_name','reg_time','comment','mmid','pidx'];
     }
+
     public function __invoke(){
         if(request()->ajax()){
             $data = \App\Comment
                 ::orderBy('reg_time','desc')
                 ->whereRaw('1=2');
-            $appData = \App\AppsData::find(request()->input('idx'),['order_id','app_id','mem_id']);
+            $appData = \App\AppsData::find(request()->input('idx'), ['order_id','app_id','mem_id']);
             $mmid = request()->input('mmid');
+
             if(($mmid == 'all' || $mmid == 'payment') && $appData->order_id != null){
                 $data->orwhere(function($query) use ($appData){
                     $subQuery = \App\AppsPaymentData
@@ -28,6 +31,7 @@ class CommentController extends Controller
                     $query->where('pidx',\DB::raw('('.$subQuery.')'));
                 });
             }
+
             if(($mmid == 'all' || $mmid == 'order') && $appData->order_id != null){
                 $data->orwhere(function($query) use ($appData){
                     $subQuery = \App\AppsOrderData
@@ -39,6 +43,7 @@ class CommentController extends Controller
                     $query->where('pidx',\DB::raw('('.$subQuery.')'));
                 });
             }
+
             if(($mmid == 'all' || $mmid == 'new_update')){
                 $data->orwhere(function($query) use ($appData){
                     $subQuery = \App\AppsUpdateData
@@ -51,8 +56,10 @@ class CommentController extends Controller
                     $query->where('pidx',\DB::raw('('.$subQuery.')'));
                 });
             }
+
             if(($mmid == 'all' || $mmid == 'apps') && $appData->mem_id != null)
                 $data->orwhere('pidx',request()->input('idx'));
+
             if(($mmid == 'all' || $mmid == 'myqna')){
                 $data->orwhere(function($query) use ($appData){
                     $subQuery = \App\MyqnaData
@@ -65,6 +72,7 @@ class CommentController extends Controller
                     $query->where('pidx',\DB::raw('('.$subQuery.')'));
                 });
             }
+
             if(($mmid == 'all' || $mmid == 'ma')){
                 $data->orwhere(function($query) use ($appData){
                     $subQuery = \App\MAData

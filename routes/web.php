@@ -165,4 +165,9 @@ Route::group(['middleware' => ['auth']], function() {
   //관리자 관리
   Route::get('/admin','Admin')->name('admin');
   Route::post('/adminupdate','Admin@update')->name('adminupdate');
+
+  //회원정보
+  Route::get('/user/{mem_id}',function($mem_id){
+    return view('partials.asideUserInfo',['mem_id'=>$mem_id]);
+  });
 });

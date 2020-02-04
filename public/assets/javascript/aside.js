@@ -14,6 +14,19 @@ $("#sidebar-close,#sidebar-toggle").click(function (e) {
     sidebarClose();
   }
 });
+var aaa;
+function setUserInfo(mem_id){
+  $.ajax({
+    url: '/user/'+mem_id,
+    datatype:'json',
+    success:function(response){
+      aaa = response;
+      $('#user-info').html(response);
+      sidebarOpen();
+      $('#nav-cc-tab').click();
+    }
+  })
+}
 
 function sidebarOpen() {
   $('#content').attr("class","col-md-8 p-0");

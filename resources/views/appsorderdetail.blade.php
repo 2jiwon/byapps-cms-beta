@@ -72,7 +72,7 @@
                             <label class="col-md-2 col-form-label">회원 ID</label>
                             <div class="col-md-10 col-xs-9">
                                 <p class="form-control-static mt-1 mb-1"> <i class="fa fa-user"></i>&nbsp;&nbsp;{{ $appsOrderData->mem_id }}
-                                  <input class="btn btn-primary waves-effect wave-light btn-xs ml-1 mr-1" type="button" value="회원정보">
+                                  <input class="btn btn-primary waves-effect wave-light btn-xs ml-1 mr-1" type="button" value="회원정보" onclick="setUserInfo('{!! $appsOrderData->mem_id !!}')">
                                 </p>
                             </div>
                         </div>
@@ -229,7 +229,7 @@
     <!-- row end -->
 </div>
 <!-- container-fluid end -->
+@endsection
 
-
-
+@section('script')
 @endsection
