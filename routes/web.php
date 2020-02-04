@@ -155,19 +155,21 @@ Route::group(['middleware' => ['auth']], function() {
   Route::get('/resellerpaymentlist/data', 'ResellerPaymentController@getResellerPaymentListData')->name('resellerpaymentlist');
   Route::get('/resellerpaymentdetail/{idx}', 'ResellerPaymentController@getSingleData')->name('resellerpaymentdetail');
 
-  //댓글
+  // 사이드바 댓글
   Route::post('/comment','CommentController')->name('comment');
   Route::post('/commentSend','CommentController@send')->name('commentsend');
 
   // 사이드바 검색
   Route::post('/side_search', 'SearchContorller@sideSearch')->name('side-search');
 
+  //사이드바 회원정보
+  Route::get('/user/{mem_id}',function($mem_id){
+    return view('partials.aside_user_info',['mem_id'=>$mem_id]);
+  });
+
   //관리자 관리
   Route::get('/admin','Admin')->name('admin');
   Route::post('/adminupdate','Admin@update')->name('adminupdate');
 
-  //회원정보
-  Route::get('/user/{mem_id}',function($mem_id){
-    return view('partials.aside_user_info',['mem_id'=>$mem_id]);
-  });
+
 });
