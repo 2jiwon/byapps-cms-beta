@@ -81,24 +81,16 @@ class SearchContorller extends Controller
 
     public function sideSearch(Request $request)
     {
-      $totalCnt = 0;
-      $appsCnt = AppsData::where('app_name', 'like', '%'.request('query').'%')
+      $appsData = AppsData::where('app_name', '=', request('query'))
                             ->orderBy('reg_time', 'desc')
-                            ->count();
+                            ->first();
 
-      $appsData = AppsData::where('app_name', 'like', '%'.request('query').'%')
-                            ->orderBy('reg_time', 'desc')
-                            ->take(20)
-                            ->get();
+      // $mem_id = AppsData::where('app_name', '=', $appsData->app_name)
+      //                     ->value('mem_id');
 
-      $mem_id = AppsData::where('app_name', '=', $appsData[0]['app_name'])
-                          ->select('mem_id')->get();
+      $userInfo = UserInfo::where('mem_id', '=', $appsData->mem_id)
+                            ->first();
 
-      $userInfo = UserInfo::where('mem_id', '=', $mem_id)
-                            ->get();
-
-      $data = [ $appsData, $userInfo ];
-
-      return $data;
+      return compact('appsData','userInfo');
     }
 }

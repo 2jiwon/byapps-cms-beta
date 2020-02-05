@@ -30,14 +30,21 @@
                 success: function(response) {
                   //console.log(response);
                   $('#nav-search-info-tab').click();
-                  $('#search-info-app-name').html(`${response[0][0].app_name}`);
-                  $('#nav-company-info #company-id').html(`${response[0][0].mem_id}`);
 
-                  // $('#nav-company-info #cellno').value = response[0][1].cellno;
-                  document.getElementById('cellno').value = response[0][1].cellno;
-                  console.log(response[0][1].cellno);
+                  $('#search-info-app-name').html(`${response.appsData.app_name}`);
+                  $('#nav-company-info #company-id').html(`${response.appsData.mem_id}`);
+                  $('#nav-company-info #reseller').html(`${response.appsData.recom_id}`);
+                  $('#nav-company-info #password').html(`${response.userInfo.passwd}`);
+                  if(response.userInfo.ceo_name != null) {
+                    $('#nav-company-info #ceo_name').html(`${response.userInfo.ceo_name}`);
+                  }
+                  $('#nav-company-info #mem_name').html(`${response.userInfo.mem_name}`);
 
-                  $('#nav-app-info #app-id').html(`${response[0][0].app_id}`);
+                  document.getElementById('cellno').value = response.userInfo.cellno;
+                  document.getElementById('email').value = response.userInfo.mem_email;
+
+                  $('#nav-app-info #app_id').html(`${response.appsData.app_id}`);
+                  document.getElementById('app_name').value = response.appsData.app_name;
                 }
             })
         });
@@ -157,7 +164,7 @@
 
             <!-- #nav-comment -->
             <div class="tab-pane px-3" id="nav-search-info" role="tabpanel" aria-labelledby="nav-search-info">
-                <!-- card -->
+              <!-- card -->
               <h3 class="card-title my-2">
                   <a class="text-dark" id="search-info-app-name">
                   </a>
@@ -189,11 +196,11 @@
                                       </div>
                                       <div class="form-group row">
                                           <label class="col-md-5 col-xs-12 control-label">비밀번호</label>
-                                          <input type="password" name="pw" class="col-4" value="">
+                                          <input type="password" name="pw" class="col-4" id="password" value="">
                                       </div>
                                       <div class="form-group row">
                                           <label class="col-md-5 col-xs-12 control-label">비밀번호 확인</label>
-                                          <input type="password" name="check_pw" class="col-4" value="">
+                                          <input type="password" name="check_pw" class="col-4" id="password_confirm" value="">
                                       </div>
 
                                   </div>
@@ -201,11 +208,11 @@
                                   <div class="col-md-12">
                                       <div class="form-group row">
                                           <label class="col-md-5 col-xs-12 control-label">대표자</label>
-                                          <strong class="form-control-static" id="ceo"></strong>
+                                          <strong class="form-control-static" id="ceo_name"></strong>
                                       </div>
                                       <div class="form-group row">
                                           <label class="col-md-5 col-xs-12 control-label">담당자</label>
-                                          <strong class="form-control-static mr-3" id=""></strong>
+                                          <strong class="form-control-static mr-3" id="mem_name"></strong>
                                       </div>
                                       <div class="form-group row">
                                           <label class="col-md-5 col-xs-12 control-label">연락처</label>
@@ -213,7 +220,7 @@
                                       </div>
                                       <div class="form-group row">
                                           <label class="col-md-5 col-xs-12 control-label">이메일</label>
-                                          <input type="text" name="email" class="col-4" value="">
+                                          <input type="text" name="email" class="col-4" id="email" value="">
                                       </div>
                                   </div>
 
@@ -231,7 +238,7 @@
                                       </div>
                                       <div class="form-group row">
                                           <label class="col-md-5 col-xs-12 control-label">APP NAME</label>
-                                          <input type="text" name="pw" class="col-4" value="">
+                                          <input type="text" name="pw" class="col-4"  id="app_name" value="">
                                       </div>
                                       <div class="form-group row">
                                           <label class="col-md-5 col-xs-12 control-label">부가서비스</label>
@@ -253,7 +260,7 @@
                                               <br>
                                               <div class="checkbox checkbox-pink">
                                                   <label>
-                                                      <input type="checkbox" value="android" >
+                                                      <input type="checkbox" value="android">
                                                       <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                                                       MA통합
                                                   </label>
@@ -326,7 +333,7 @@
                     <div class="row">
                         <div class="col-sm-12" id="user-info">
                           @if(isset($mem_id) && $mem_id != null)
-                            @include('partials.asideUserInfo',['mem_id'=>$mem_id])
+                            @include('partials.aside_user_info',['mem_id'=>$mem_id])
                           @endif
                         </div><!--row end-->
                     </div><!--col end-->
