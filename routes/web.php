@@ -45,11 +45,13 @@ Route::get('/data','File@view');
 Route::group(['middleware' => ['auth']], function() {
   // 결제관리
   Route::view('/appspaylist', 'appspaylist')->name('appspaylist.view');
+  Route::view('/etc_pay', 'appspay_etc_pay')->name('appspay_etc_pay.view');
   Route::get('/appspaylist/data', 'AppsPaymentController@getAppsPaymentData')->name('appspaylist');
   Route::get('/appspaydetail/{idx}', 'AppsPaymentController@getSingleData')->name('appspaydetail');
   Route::post('/appspayupdate/{idx}', 'AppsPaymentController@update')->name('appspayupdate');
   Route::post('/getappsorderidx', 'AppsPaymentController@getAppsOrderIdx')->name('getappsorderidx');
   Route::post('/getappspaymentidx', 'AppsPaymentController@getAppsPaymentIdx')->name('getappspaymentidx');
+
   // 프로모션
   Route::view('/promolist', 'promolist')->name('promolist.view');
   Route::get('/promolist/data', 'PromotionController@getPromotionData')->name('promolist');

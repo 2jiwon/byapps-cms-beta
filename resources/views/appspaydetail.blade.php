@@ -9,6 +9,11 @@
 <div class="row">
     <!-- col-sm-12 start -->
     <div class="col-sm-12">
+
+      <div class="text-right pb-2">
+          <a type="button" class="btn btn-info waves-light waves-effect w-md" href="/etc_pay">별도결제</a>
+      </div>
+
     <!-- card -->
     <div class="card">
         <!-- cardbody start -->
@@ -75,7 +80,7 @@
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">App 명</label>
                             <div class="col-md-10 col-xs-9">
-                                <p class="form-control-static mt-1 mb-1"> {{ $appsPaymentData->app_name }} ({{ $appsPaymentData->apps_type }}) </p>
+                                <p class="form-control-static mt-1 mb-1">{{ $appsPaymentData->app_name }} ({{ $appsPaymentData->apps_type }}) </p>
                             </div>
                         </div>
 
