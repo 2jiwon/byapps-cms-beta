@@ -18,7 +18,10 @@ class AppsPaymentData extends Model implements Searchable
   protected $table = 'BYAPPS_apps_payment_data';
   protected $primaryKey = 'idx';
   public $timestamps = false;
-  protected $fillable = ['receipt'];
+  protected $fillable = [ 'idx', 'mem_id', 'order_id', 'recom_id', 'process', 'pay_type',
+    'apps_type', 'app_name', 'term', 'start_time', 'end_time', 'amount', 'payment',
+    'receipt', 'promotion', 'reg_time'
+  ];
 
   public static function getPaymentData()
   {

@@ -46,6 +46,7 @@ Route::group(['middleware' => ['auth']], function() {
   // 결제관리
   Route::view('/appspaylist', 'appspaylist')->name('appspaylist.view');
   Route::view('/etc_pay', 'appspay_etc_pay')->name('appspay_etc_pay.view');
+  Route::post('/add_etc_pay', 'AppsPaymentController@create')->name('add_etc_pay');
   Route::get('/appspaylist/data', 'AppsPaymentController@getAppsPaymentData')->name('appspaylist');
   Route::get('/appspaydetail/{idx}', 'AppsPaymentController@getSingleData')->name('appspaydetail');
   Route::post('/appspayupdate/{idx}', 'AppsPaymentController@update')->name('appspayupdate');

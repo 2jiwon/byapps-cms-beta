@@ -45,7 +45,7 @@
                         <!-- form start -->
                         {!! Form::open([ 'route' => ['appspayupdate', $appsPaymentData->idx] ]) !!}
 
-                        <input type="hidden" name="order_id" value=" {{ $appsPaymentData->order_id }}">
+                        <input type="hidden" name="order_id" value="{{ $appsPaymentData->order_id }}">
                         <input type="hidden" name="reg_time" value="{{ $appsPaymentData->reg_time }}">
                         <input type="hidden" name="app_name" value="{{ $appsPaymentData->app_name }} ({{ $appsPaymentData->apps_type }})">
 
